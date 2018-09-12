@@ -36,4 +36,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'leslies' => [
+        'api_key' => env('LESLIES_API_KEY'),
+        'api_url' => env('LESLIES_API_URL', 'http://www.poolsupplyworld.com/api.cfm'),
+        'cache_timeout' => env('LESLIES_CACHE_TIMEOUT')
+    ]
+
 ];
