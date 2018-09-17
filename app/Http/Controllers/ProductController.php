@@ -13,8 +13,7 @@ class ProductController extends Controller
            limit in some way. */
         
         $products = Product::orderBy('name', 'asc')
-            ->with('thumbnail:id,image_url')
-            ->select(['id', 'thumbnail_id', 'name', 'brand', 'type'])
+            ->with('thumbnail')
             ->get();
 
         return response()->json(['products' => $products]);
@@ -22,9 +21,12 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load(['attributes', 'images' => function($query) {
+        $product->load(['atts', 'images' => function($query) {
             $query->ordered();
         }]);
-        return response()->json($product);
+        return response()->json([
+            'product' => $product->makeVisible('description'),
+            'related_products' => $product->getRelatedProducts()
+        ]);
     }
 }

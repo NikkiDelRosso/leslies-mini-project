@@ -1,13 +1,13 @@
 <template>
-    <div class="home">
+    <div class="home mt-5">
         <h1>{{ title }}</h1>
         <div v-if="loading">Loading...</div>
         <div v-else>
-            <div v-if="productList.length > 0">
-                <product-summary
-                    v-for="product in productList"
-                    v-bind:key="product.id"
-                    :product="product"></product-summary>
+            <div v-if="productList.length > 0" class="products row">
+                <div class="col col-md-4 col-lg-3 mb-3 d-flex align-items-stretch" v-for="product in productList"
+                    v-bind:key="product.id">
+                        <product-summary :product="product"></product-summary>
+                </div>
             </div>
             <div v-else><em>There are no products to show you!</em></div>
         </div>

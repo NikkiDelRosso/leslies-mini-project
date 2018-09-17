@@ -11,6 +11,7 @@ axios.defaults.baseURL = '/api/'
 
 import App from './components/App'
 import Home from './components/Home'
+import ProductDetails from './components/ProductDetails'
 
 const router = new VueRouter({
     mode: 'history',
@@ -20,6 +21,12 @@ const router = new VueRouter({
             name: 'home',
             component: Home,
             props: { title: "Welcome" }
+        },
+        {
+            path: '/product/:id',
+            name: 'product',
+            component: ProductDetails,
+            props: { title: "Product Details" }
         },
     ],
 })

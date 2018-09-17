@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductAttribute extends Model
 {
-    protected $fillable = ['key', 'value'];
+    protected $fillable = ['key', 'value'],
+        $visible = ['key', 'value'];
 
     public function product()
     {

@@ -92,7 +92,7 @@ class PopulateData extends Command
         );
 
         foreach ($attribute_fields as $attr) {
-            $product->attributes()->create([
+            $product->atts()->create([
                 'key' => $attr,
                 'value' => $data->{$attr}
             ]);
