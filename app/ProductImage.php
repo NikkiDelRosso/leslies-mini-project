@@ -18,8 +18,9 @@ class ProductImage extends Model
         return $query->orderBy('order', 'asc');
     }
 
-    public function getSize($width, $height)
-    {
-        return sprintf('%s?%dx%d', $this->image_url, $width, $height);
-    }
+    // Not using this from the Laravel side, but I can get thumbnails like so
+    // public function getSize($width, $height)
+    // {
+    //     return sprintf('%s?%dx%d', $this->image_url, $width, $height);
+    // }
 }
