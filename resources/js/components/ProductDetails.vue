@@ -30,7 +30,7 @@
                     <div class="mb-3 mt-3">{{ product.formattedDescription }}</div>
 
                     <a href="#" @click="contact" class="btn btn-lg btn-primary btn-block mb-3">Contact us about this item</a>
-                    <router-link :to="{ name: 'home' }" class="btn btn-secondary btn-sm">&lt; Back to all products</router-link>
+                    <router-link :to="{ name: 'home' }" class="btn btn-secondary btn-sm back-to-all">&lt; Back to all products</router-link>
                 </div>
             </div>
             <div v-if="relatedProducts.length > 0">

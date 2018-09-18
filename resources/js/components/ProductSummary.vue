@@ -8,7 +8,7 @@
         </div>
         <ul class="list-group list-group-flush">
             <router-link tag="li" class="list-group-item text-center" :to="{ name: 'product', params: { 'id': product.id }}">
-                <a class="d-block">View Details</a>
+                <a class="d-block" :id="'product_link_' + product.id">View Details</a>
             </router-link>
         </ul>
     </div>

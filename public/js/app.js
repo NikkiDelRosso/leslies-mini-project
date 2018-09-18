@@ -50516,7 +50516,7 @@ var render = function() {
                     _c(
                       "router-link",
                       {
-                        staticClass: "btn btn-secondary btn-sm",
+                        staticClass: "btn btn-secondary btn-sm back-to-all",
                         attrs: { to: { name: "home" } }
                       },
                       [_vm._v("< Back to all products")]
@@ -50789,7 +50789,16 @@ var render = function() {
                 to: { name: "product", params: { id: _vm.product.id } }
               }
             },
-            [_c("a", { staticClass: "d-block" }, [_vm._v("View Details")])]
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "d-block",
+                  attrs: { id: "product_link_" + _vm.product.id }
+                },
+                [_vm._v("View Details")]
+              )
+            ]
           )
         ],
         1

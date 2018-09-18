@@ -50,7 +50,7 @@ class Product extends Model
                 $this->_addToMatches($matches, $query);
             }
 
-            return $matches->sortByDesc('relevance')->values()->all();
+            return $matches->sortByDesc('relevance')->values();
         });
     }
 
