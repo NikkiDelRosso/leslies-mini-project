@@ -4,7 +4,19 @@
         <div v-if="!loaded">Loading...</div>
         <div v-elseif="product">
             <div class="product-details clearfix mb-5">
-                <img v-if="product.images.length > 0" :src="product.images[0].image_url" class="float-md-left mr-md-3 img-fluid">
+                <div class="float-md-left mr-md-3" v-if="product.images.length > 0">
+                    <img :src="getImage(this.selectedThumbnail)" ref="image" class="img-fluid">
+                    <div v-if="product.images.length > 1" class="thumbnails row">
+                        <div class="col mt-3">
+                            <img class="mr-2 thumbnail"
+                                v-bind:key="image.image_url"
+                                v-for="(image, index) in product.images"
+                                :src="image.image_url + '?50x50'"
+                                :class="selectedThumbnail == index? 'active' : ''"
+                                @click="selectedThumbnail = index">
+                        </div>
+                    </div>
+                </div>
                 <h1>{{ product.name }}</h1>
             
                 {{ product.description }}
@@ -29,7 +41,8 @@
                 id : this.$route.params.id,
                 loaded: false,
                 product: null,
-                relatedProducts: []
+                relatedProducts: [],
+                selectedThumbnail: 0
             }
         },
         methods: {
@@ -39,6 +52,14 @@
                     this.relatedProducts = response.data.related_products
                     this.loaded = true
                 })
+            },
+            getImage(index) {
+                if (index >= this.product.images.length) {
+                    return
+                }
+
+                let img = this.product.images[index]
+                return img.image_url + '?500x500'
             }
         },
         created() {
