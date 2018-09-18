@@ -1,25 +1,36 @@
 <template>
-    <div class="mt-5" :id="'product_' + id">
-        <router-link :to="{ name: 'home' }">&lt; Back to all products</router-link>
-        <div v-if="!loaded">Loading...</div>
+    <div class="my-5 container" :id="'product_' + id">
+        <div v-if="!loaded" class="mb-5">Loading...</div>
         <div v-elseif="product">
-            <div class="product-details clearfix mb-5">
-                <div class="float-md-left mr-md-3" v-if="product.images.length > 0">
-                    <img :src="getImage(this.selectedThumbnail)" ref="image" class="img-fluid">
-                    <div v-if="product.images.length > 1" class="thumbnails row">
-                        <div class="col mt-3">
-                            <img class="mr-2 thumbnail"
-                                v-bind:key="image.image_url"
-                                v-for="(image, index) in product.images"
-                                :src="image.image_url + '?50x50'"
-                                :class="selectedThumbnail == index? 'active' : ''"
-                                @click="selectedThumbnail = index">
+            <div class="product-details mb-5 row">
+                <div class="col-12 col-md-6">
+                    <div class="mr-md-3 mb-3" v-if="product.images.length > 0">
+                        <img :src="getImage(this.selectedThumbnail)" ref="image" class="img-fluid">
+                        <div v-if="product.images.length > 1" class="thumbnails row">
+                            <div class="col mt-3">
+                                <img class="mr-2 mb-2 thumbnail"
+                                    v-bind:key="image.image_url"
+                                    v-for="(image, index) in product.images"
+                                    :src="image.image_url + '?50x50'"
+                                    :class="selectedThumbnail == index? 'active' : ''"
+                                    @click="selectedThumbnail = index">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <h1>{{ product.name }}</h1>
-            
-                {{ product.description }}
+
+                <div class="col">
+                    <h1>{{ product.name }}</h1>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">Brand: {{ product.brand }}</li>
+                        <li class="list-group-item">Type: {{ product.type }}</li>
+                    </ul>
+                
+                    <div class="mb-3 mt-3">{{ product.formattedDescription }}</div>
+
+                    <router-link :to="{ name: 'home' }" class="btn btn-secondary btn-sm">&lt; Back to all products</router-link>
+                </div>
             </div>
             <div v-if="relatedProducts.length > 0">
                 <h2>You may also be interested in...</h2>
@@ -49,6 +60,7 @@
             loadProductDetails() {
                 this.$http.get('products/' + this.id).then((response) => {
                     this.product = response.data.product
+                    this.product.formattedDescription = this.product.description.replace('\n', '<br>')
                     this.relatedProducts = response.data.related_products
                     this.loaded = true
                 })
@@ -62,8 +74,19 @@
                 return img.image_url + '?500x500'
             }
         },
-        created() {
+        mounted() {
             this.loadProductDetails()
+        },
+        watch: {
+            '$route.params.id': function (id) {
+                window.scrollTo(0,0)
+                this.id = id
+                this.loaded = false
+                this.selectedThumbnail = 0
+                this.product = null
+                this.relatedProducts = []
+                this.loadProductDetails()
+            }
         }
     }
 </script>

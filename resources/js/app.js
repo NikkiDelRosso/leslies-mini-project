@@ -12,6 +12,7 @@ axios.defaults.baseURL = '/api/'
 import App from './components/App'
 import Home from './components/Home'
 import ProductDetails from './components/ProductDetails'
+import PageNotFound from './components/PageNotFound'
 
 const router = new VueRouter({
     mode: 'history',
@@ -20,7 +21,7 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: Home,
-            props: { title: "Welcome" }
+            props: { title: "Our Products" }
         },
         {
             path: '/product/:id',
@@ -28,6 +29,14 @@ const router = new VueRouter({
             component: ProductDetails,
             props: { title: "Product Details" }
         },
+        {
+            path: '/product',
+            redirect: '/'
+        },
+        {
+            path: '*',
+            component: PageNotFound
+        }
     ],
 })
 

@@ -5,7 +5,6 @@
         </router-link>
         <div class="card-body">
             <div class="product--name card-title">{{ product.name }}</div>
-            <div class="product--brand">Brand: {{ product.brand }}</div>
         </div>
         <ul class="list-group list-group-flush">
             <router-link tag="li" class="list-group-item text-center" :to="{ name: 'product', params: { 'id': product.id }}">
