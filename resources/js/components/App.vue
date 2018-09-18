@@ -1,10 +1,12 @@
 <template>
     <div>
-        <nav class="navbar navbar-dark bg-dark">
-            <router-link class="navbar-brand" to="/">Awesome Pool Supplier</router-link>
-            <span class="navbar-text">
-                Selling sweet pool supplies with no actual way to buy them!
-            </span>
+        <nav class="navbar navbar-dark">
+            <div class="container">
+                <router-link class="navbar-brand" to="/">Awesome Pool Supplier</router-link>
+                <span class="navbar-text">
+                    Selling sweet pool supplies... with no actual way to buy them!
+                </span>
+            </div>
         </nav>
         <main role="main">
             <router-view></router-view>

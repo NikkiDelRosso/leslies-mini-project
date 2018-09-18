@@ -21,11 +21,8 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load(['atts', 'images' => function($query) {
-            $query->ordered();
-        }]);
         return response()->json([
-            'product' => $product->makeVisible('description'),
+            'product' => $product->loadDetails(),
             'related_products' => $product->getRelatedProducts()
         ]);
     }

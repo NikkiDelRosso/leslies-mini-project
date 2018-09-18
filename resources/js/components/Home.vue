@@ -1,7 +1,7 @@
 <template>
     <div class="home">
 
-        <header class="jumbotron text-center">
+        <header class="jumbotron text-light">
             <div class="container">
                 <h1 class="jumbotron-heading">{{ title }}</h1>
             </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="my-5 container" :id="'product_' + id">
         <div v-if="!loaded" class="mb-5">Loading...</div>
-        <div v-elseif="product">
+        <div v-else-if="product">
             <div class="product-details mb-5 row">
                 <div class="col-12 col-md-6">
                     <div class="mr-md-3 mb-3" v-if="product.images.length > 0">
@@ -29,6 +29,7 @@
                 
                     <div class="mb-3 mt-3">{{ product.formattedDescription }}</div>
 
+                    <a href="#" @click="contact" class="btn btn-lg btn-primary btn-block mb-3">Contact us about this item</a>
                     <router-link :to="{ name: 'home' }" class="btn btn-secondary btn-sm">&lt; Back to all products</router-link>
                 </div>
             </div>
@@ -72,6 +73,9 @@
 
                 let img = this.product.images[index]
                 return img.image_url + '?500x500'
+            },
+            contact() {
+                alert('Pretend this is a contact page or something useful')
             }
         },
         mounted() {
